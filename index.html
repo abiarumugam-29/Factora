@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>KnowQuest Kids</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="topbar">
+
+  <button class="logo" onclick="goHome()">
+    🧭 KnowQuest
+  </button>
+
+  <div class="stats">
+    <div class="stat">
+      ⭐ <b id="topXP">0</b>
+      <small>XP</small>
+    </div>
+
+    <div class="stat">
+      🃏 <b id="topCards">0</b>
+      <small>Cards</small>
+    </div>
+  </div>
+
+</header>
+
+
+<main>
+
+  <!-- HOME -->
+
+  <section id="home" class="screen active">
+
+    <div class="hero">
+
+      <div class="hero-content">
+
+        <span class="eyebrow">
+          🌟 LEARN • PLAY • DISCOVER
+        </span>
+
+        <h1>
+          Ready for a
+          <span>Knowledge Quest?</span>
+        </h1>
+
+        <p>
+          Explore interesting facts, solve mystery clues
+          and build your own collection of knowledge cards.
+        </p>
+
+        <button class="primary big" onclick="showCategories()">
+          🚀 Start a Quest
+        </button>
+
+      </div>
+
+      <div class="hero-art">
+        🌎
+      </div>
+
+    </div>
+
+
+    <div class="feature-grid">
+
+      <div class="feature">
+        🔍
+        <div>
+          <h3>Mystery Clues</h3>
+          <p>Use clues only when you need help.</p>
+        </div>
+      </div>
+
+      <div class="feature">
+        🃏
+        <div>
+          <h3>Knowledge Cards</h3>
+          <p>Collect cards as you learn.</p>
+        </div>
+      </div>
+
+      <div class="feature">
+        🎯
+        <div>
+          <h3>Fresh Questions</h3>
+          <p>Questions you answered won't repeat.</p>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="level-box">
+
+      <div>
+        <span class="eyebrow">YOUR JOURNEY</span>
+
+        <h2 id="levelTitle">
+          Level 1 — Curious Explorer
+        </h2>
+
+      </div>
+
+      <div class="level-number" id="levelNumber">
+        1
+      </div>
+
+      <div class="progress">
+        <div id="levelProgress"></div>
+      </div>
+
+      <small id="levelText">
+        0 / 100 XP
+      </small>
+
+    </div>
+
+  </section>
+
+
+  <!-- CATEGORY -->
+
+  <section id="categories" class="screen">
+
+    <div class="section-title">
+
+      <button onclick="goHome()" class="back">
+        ←
+      </button>
+
+      <div>
+        <span class="eyebrow">STEP 1</span>
+        <h2>Choose your world</h2>
+        <p>What do you want to explore?</p>
+      </div>
+
+    </div>
+
+    <div id="categoryGrid" class="category-grid"></div>
+
+  </section>
+
+
+  <!-- TOPIC -->
+
+  <section id="topics" class="screen">
+
+    <div class="section-title">
+
+      <button onclick="showCategories()" class="back">
+        ←
+      </button>
+
+      <div>
+        <span class="eyebrow">STEP 2</span>
+        <h2 id="topicTitle">Choose a topic</h2>
+        <p>Pick your adventure.</p>
+      </div>
+
+    </div>
+
+    <div id="topicGrid" class="topic-grid"></div>
+
+  </section>
+
+
+  <!-- QUIZ -->
+
+  <section id="quiz" class="screen">
+
+    <div class="quiz-header">
+
+      <button class="back" onclick="exitQuiz()">
+        ✕
+      </button>
+
+      <div class="quiz-progress">
+        <div id="quizProgress"></div>
+      </div>
+
+      <span id="questionNumber">
+        1 / 5
+      </span>
+
+    </div>
+
+
+    <div class="quiz-meta">
+
+      <span id="quizCategory">
+        🌎 World
+      </span>
+
+      <span>
+        ⭐ <b id="quizXP">0</b> XP
+      </span>
+
+    </div>
+
+
+    <div class="question-card">
+
+      <div class="question-icon">
+        ❓
+      </div>
+
+      <h2 id="question">
+        Question
+      </h2>
+
+      <div id="options" class="options"></div>
+
+    </div>
+
+
+    <!-- CLUES -->
+
+    <div class="clue-box">
+
+      <div class="clue-heading">
+
+        <div>
+          🔍 <b>Mystery Clues</b>
+
+          <small>
+            Need a little help?
+          </small>
+        </div>
+
+        <span>
+          More clues = less XP
+        </span>
+
+      </div>
+
+
+      <div class="clue-buttons">
+
+        <button onclick="useClue(0)" id="clue0">
+          🔍 Clue 1
+          <small>+20 XP</small>
+        </button>
+
+        <button onclick="useClue(1)" id="clue1">
+          🔍 Clue 2
+          <small>+15 XP</small>
+        </button>
+
+        <button onclick="useClue(2)" id="clue2">
+          🔍 Clue 3
+          <small>+10 XP</small>
+        </button>
+
+      </div>
+
+
+      <div id="clueText" class="clue-text hidden"></div>
+
+    </div>
+
+
+    <!-- FEEDBACK -->
+
+    <div id="feedback" class="feedback hidden">
+
+      <div id="feedbackIcon">
+        🎉
+      </div>
+
+      <div>
+        <h3 id="feedbackTitle">
+          Correct!
+        </h3>
+
+        <p id="feedbackText"></p>
+      </div>
+
+      <button class="primary" onclick="nextQuestion()">
+        Next →
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- RESULT -->
+
+  <section id="result" class="screen">
+
+    <div class="result-card">
+
+      <div class="result-icon">
+        🎉
+      </div>
+
+      <span class="eyebrow">
+        QUEST COMPLETE
+      </span>
+
+      <h1>
+        Awesome, Explorer!
+      </h1>
+
+      <p id="resultMessage">
+        You discovered something new today.
+      </p>
+
+
+      <div class="result-stats">
+
+        <div>
+          ⭐
+          <b id="resultXP">0</b>
+          <small>XP earned</small>
+        </div>
+
+        <div>
+          🧠
+          <b id="resultCorrect">0/0</b>
+          <small>correct</small>
+        </div>
+
+        <div>
+          🃏
+          <b id="resultCards">0</b>
+          <small>cards</small>
+        </div>
+
+      </div>
+
+
+      <div class="learning">
+
+        💡
+
+        <div>
+          <b>Keep exploring!</b>
+
+          <p>
+            Every question adds a little more
+            to your Knowledge World.
+          </p>
+        </div>
+
+      </div>
+
+
+      <button class="primary big" onclick="showCategories()">
+        🗺️ Another Quest
+      </button>
+
+      <br>
+
+      <button class="secondary" onclick="goHome()">
+        🏠 Dashboard
+      </button>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<div id="toast"></div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
